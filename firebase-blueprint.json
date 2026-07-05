@@ -1,0 +1,118 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Onboarding profile information for students.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Unique user identifier from Firebase Auth."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user."
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the student."
+        },
+        "college": {
+          "type": "string",
+          "description": "College or University name."
+        },
+        "branch": {
+          "type": "string",
+          "description": "Branch/Major/Field of study."
+        },
+        "year": {
+          "type": "string",
+          "description": "Academic year (e.g. 1st, 2nd, 3rd, 4th)."
+        },
+        "careerGoal": {
+          "type": "string",
+          "description": "Career target (e.g. AI Engineer, Web Developer)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "name", "college", "branch", "year", "careerGoal"]
+    },
+    "Assessment": {
+      "title": "Assessment",
+      "description": "Scores from Python, Java, DSA, and Aptitude MCQ assessments.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The user ID who took the test."
+        },
+        "pythonScore": {
+          "type": "integer",
+          "description": "Score out of 100 for Python assessment."
+        },
+        "javaScore": {
+          "type": "integer",
+          "description": "Score out of 100 for Java assessment."
+        },
+        "dsaScore": {
+          "type": "integer",
+          "description": "Score out of 100 for Data Structures & Algorithms."
+        },
+        "aptitudeScore": {
+          "type": "integer",
+          "description": "Score out of 100 for Aptitude."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["userId", "pythonScore", "javaScore", "dsaScore", "aptitudeScore"]
+    },
+    "Roadmap": {
+      "title": "Roadmap",
+      "description": "The custom learning roadmap generated for the student.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "References the user's uid."
+        },
+        "careerGoal": {
+          "type": "string",
+          "description": "Goal designation like AI Engineer or Web Developer."
+        },
+        "progress": {
+          "type": "integer",
+          "description": "Calculated percentage completion."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["userId", "careerGoal", "progress"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Users collection using the uid as the document ID."
+    },
+    "users/{userId}/assessments/metrics": {
+      "schema": "Assessment",
+      "description": "Nested assessment score metrics for the specific user."
+    },
+    "users/{userId}/roadmaps/details": {
+      "schema": "Roadmap",
+      "description": "Nested current roadmap status and completion tracker."
+    }
+  }
+}

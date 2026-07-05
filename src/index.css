@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Custom Sky Blue Palette overrides for violet */
+  --color-violet-50: #f0f9ff;
+  --color-violet-100: #e0f2fe;
+  --color-violet-200: #bae6fd;
+  --color-violet-300: #7dd3fc;
+  --color-violet-400: #38bdf8;
+  --color-violet-500: #0ea5e9;
+  --color-violet-600: #0284c7;  /* High-contrast beautiful sky blue */
+  --color-violet-700: #0369a1;
+  --color-violet-800: #075985;
+  --color-violet-900: #0c4a6e;
+
+  /* Soft off-white for blocks */
+  --color-white: #fdfefe; /* softest off-white for blocks */
+  --color-slate-50: #f6f8fb; /* off-white page background */
+}
+
+/* Custom scrollbar styling for a polished look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+/* Elegant, comprehensive Dark Mode variables override */
+.dark, html.dark {
+  color-scheme: dark;
+  --color-slate-50: #0a0d16;    /* Deep cosmic background */
+  --color-slate-100: #111827;   /* Elevated panels & headers */
+  --color-slate-200: #1f2937;   /* Clean default borders */
+  --color-slate-300: #374151;   /* Hover borders and active borders */
+  --color-slate-400: #4b5563;   /* Secondary icons & symbols */
+  --color-slate-500: #9ca3af;   /* Muted descriptions */
+  --color-slate-600: #cbd5e1;   /* Medium readable details */
+  --color-slate-700: #e2e8f0;   /* Secondary headings */
+  --color-slate-800: #f1f5f9;   /* Body reads */
+  --color-slate-900: #f8fafc;   /* Luminous titles and brand tags */
+
+  --color-white: #111827;       /* Card bodies nested in cosmic dark bgs */
+
+  /* Sky Blue accents mapped gracefully for dark background */
+  --color-violet-50: #0c1e30;
+  --color-violet-100: #0f2d4a;
+  --color-violet-200: #0369a1;
+  --color-violet-600: #38bdf8;  /* Vivid glowing sky blue primary in dark mode */
+  --color-violet-700: #7dd3fc;
+  --color-violet-800: #bae6fd;
+  --color-violet-900: #f0f9ff;
+
+  /* Blue / Object-Oriented Course and UI badges */
+  --color-blue-50: #0f172a;
+  --color-blue-100: #1e3a8a;
+  --color-blue-800: #60a5fa;
+
+  /* Amber / Python Programming badges */
+  --color-amber-50: #231205;
+  --color-amber-100: #451a03;
+  --color-amber-800: #f59e0b;
+
+  /* Purple / Theory & DSA badges */
+  --color-purple-50: #130a24;
+  --color-purple-100: #3b0764;
+  --color-purple-800: #c084fc;
+
+  /* Emerald / Quantitative Aptitude badges */
+  --color-emerald-50: #022c22;
+  --color-emerald-100: #064e3b;
+  --color-emerald-800: #34d399;
+
+  /* Rose / Errors, alerts & resetting actions */
+  --color-rose-100: #4c0519;
+  --color-rose-800: #fb7185;
+}
+
+/* Ensure nice smooth dark-theme transitions on general elements */
+body {
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}

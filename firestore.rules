@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidUser(data) {
+      return data.uid == request.auth.uid
+        && data.email is string && data.email.size() <= 200
+        && data.name is string && data.name.size() <= 100
+        && data.college is string && data.college.size() <= 150
+        && data.branch is string && data.branch.size() <= 100
+        && data.year is string && data.year.size() <= 30
+        && data.careerGoal is string && data.careerGoal.size() <= 100;
+    }
+
+    function isValidAssessment(data) {
+      return data.userId == request.auth.uid
+        && data.pythonScore is int && data.pythonScore >= 0 && data.pythonScore <= 100
+        && data.javaScore is int && data.javaScore >= 0 && data.javaScore <= 100
+        && data.dsaScore is int && data.dsaScore >= 0 && data.dsaScore <= 100
+        && data.aptitudeScore is int && data.aptitudeScore >= 0 && data.aptitudeScore <= 100;
+    }
+
+    function isValidRoadmap(data) {
+      return data.userId == request.auth.uid
+        && data.careerGoal is string && data.careerGoal.size() <= 100
+        && data.progress is int && data.progress >= 0 && data.progress <= 100;
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidUser(incoming());
+      allow update: if isOwner(userId) && isValidUser(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['name', 'college', 'branch', 'year', 'careerGoal', 'updatedAt'])
+      );
+      allow delete: if false;
+
+      match /assessments/metrics {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidAssessment(incoming());
+        allow delete: if false;
+      }
+
+      match /roadmaps/details {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidRoadmap(incoming());
+        allow update: if isOwner(userId) && isValidRoadmap(incoming());
+        allow delete: if false;
+      }
+    }
+  }
+}

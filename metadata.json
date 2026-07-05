@@ -1,0 +1,6 @@
+{
+  "name": "Skill Mirror",
+  "description": "Skill Mirror is a working MVP designed to assess, analyze, and build personalized learning roadmaps for students, coupled with an AI-powered coach utilizing the Gemini API.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
